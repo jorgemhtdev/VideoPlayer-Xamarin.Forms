@@ -1,7 +1,4 @@
 ﻿namespace VideoPlayer.ViewModel
 {
-    public class VideoViewModel
-    {
-
-    }
+    public class VideoViewModel  {  }
 }
