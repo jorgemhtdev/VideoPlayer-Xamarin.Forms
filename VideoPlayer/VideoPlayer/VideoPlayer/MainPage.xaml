@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="VideoPlayer.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:abstractions="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+    Title="Videos">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Icon="search.png"
+            Order="Primary"
+            Priority="0" />
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <Image
+            Aspect="Fill"
+            HorizontalOptions="Fill"
+            Source="ColoredBackground"
+            VerticalOptions="Fill" />
+        <ListView
+            BackgroundColor="Transparent"
+            CachingStrategy="RecycleElement"
+            ItemsSource="{Binding Videos}"
+            RowHeight="200"
+            SelectedItem="{Binding SelectedItemVideo}"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid
+                            Margin="10,5"
+                            ColumnSpacing="0"
+                            RowSpacing="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <Image
+                                Grid.RowSpan="2"
+                                Aspect="AspectFill"
+                                Source="{Binding HeroImage}" />
+                            <Image
+                                Grid.RowSpan="2"
+                                Aspect="Fill"
+                                HorizontalOptions="Fill"
+                                Source="ShadowOverlay"
+                                VerticalOptions="End" />
+
+                            <Grid
+                                Grid.Row="1"
+                                Margin="10"
+                                ColumnSpacing="10"
+                                RowSpacing="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="AUTO" />
+                                    <RowDefinition Height="25" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="AUTO" />
+                                </Grid.ColumnDefinitions>
+
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.ColumnSpan="3"
+                                    LineBreakMode="NoWrap"
+                                    Text="{Binding Title}" />
+                                <!--  Style="{StaticResource TitleLabel}"  -->
+
+                                <abstractions:CircleImage
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Aspect="AspectFill"
+                                    HeightRequest="25"
+                                    Source="{Binding ProfileImage}"
+                                    WidthRequest="25" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Text="{Binding Handle}"
+                                    VerticalOptions="Center" />
+                                <!--  Style="{StaticResource HandleLabel}"  -->
+
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="2"
+                                    Orientation="Horizontal"
+                                    Spacing="5"
+                                    VerticalOptions="Center">
+                                    <Image Source="Eye" />
+                                    <Label Text="{Binding ViewCount}" />
+                                    <!--  Style="{StaticResource HandleLabel}"  -->
+                                    <Label Text="views" />
+                                    <!--  Style="{StaticResource HandleLabel}"  -->
+
+                                </StackLayout>
+
+                            </Grid>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</ContentPage>
