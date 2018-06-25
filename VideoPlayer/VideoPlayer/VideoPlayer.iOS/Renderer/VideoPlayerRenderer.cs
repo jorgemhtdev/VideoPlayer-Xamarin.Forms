@@ -61,6 +61,7 @@ namespace VideoPlayer.iOS.Renderer
                 args.OldElement.PlayRequested -= OnPlayRequested;
                 args.OldElement.PauseRequested -= OnPauseRequested;
                 args.OldElement.StopRequested -= OnStopRequested;
+                
             }
         }
 

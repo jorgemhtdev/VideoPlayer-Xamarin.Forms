@@ -1,20 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using VideoPlayer.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace VideoPlayer.View
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class VideoView : ContentPage
 	{
 		public VideoView ()
 		{
 			InitializeComponent ();
 		}
-	}
+
+        void OnPlayPauseButtonClicked(object sender, EventArgs args)
+        {
+
+        }
+
+        void OnStopButtonClicked(object sender, EventArgs args)
+        {
+        }
+    }
 }

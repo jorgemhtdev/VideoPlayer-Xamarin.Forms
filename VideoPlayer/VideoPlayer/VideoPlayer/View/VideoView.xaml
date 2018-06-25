@@ -2,13 +2,81 @@
 <ContentPage
     x:Class="VideoPlayer.View.VideoView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:VideoPlayer.Models;assembly=VideoPlayer"
+    xmlns:video="clr-namespace:VideoPlayer.Controls"
+    NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <StackLayout>
-            <Label
-                HorizontalOptions="CenterAndExpand"
-                Text="Aquí se reproduce el vídeo"
-                VerticalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+            <video:VideoPlayer
+                Grid.Row="0"
+                AreTransportControlsEnabled="False"
+                Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4" />
+
+
+            <StackLayout
+                Grid.Row="0"
+                Margin="10,0"
+                Orientation="Horizontal">
+
+                <Label Text="{Binding Path=Position, StringFormat='@{0:hh\\:mm\\:ss}'}" VerticalOptions="Center" />
+
+                <Button
+                    Clicked="OnPlayPauseButtonClicked"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="&#x25B6;&#xFE0F; Play">
+                    <Button.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Status}"
+                            TargetType="Button"
+                            Value="{x:Static models:VideoStatus.Playing}">
+                            <Setter Property="Text" Value="&#x23F8; Pause" />
+                        </DataTrigger>
+
+                        <DataTrigger
+                            Binding="{Binding Status}"
+                            TargetType="Button"
+                            Value="{x:Static models:VideoStatus.NotReady}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Button
+                    Clicked="OnStopButtonClicked"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="&#x23F9; Stop">
+                    <Button.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Status}"
+                            TargetType="Button"
+                            Value="{x:Static models:VideoStatus.NotReady}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <Label Text="{Binding Path=TimeToEnd, StringFormat='@{0:hh\\:mm\\:ss}'}" VerticalOptions="Center" />
+            </StackLayout>
+            <Grid Row="0" VerticalOptions="End">
+                <video:PositionSlider
+                    Margin="10,0,10,10"
+                    Position="{Binding Position}"
+                    Duration="{Binding Duration}">
+                    <video:PositionSlider.Triggers>
+                        <DataTrigger
+                            Binding="{Binding Status}"
+                            TargetType="video:PositionSlider"
+                            Value="{x:Static models:VideoStatus.NotReady}">
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </video:PositionSlider.Triggers>
+                </video:PositionSlider>
+            </Grid>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
